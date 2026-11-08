@@ -237,7 +237,38 @@
     <script src="./dowodnowy_files/timenew.js.pobrane"></script>
     <main>
         <section id="lew">
-            <img src="./dowodnowy_files/image0.jpg" class="object-contain w-full rounded-lg photo" style="margin: 0;" alt="Brak Zdjęcia">
+            <label class="block cursor-pointer relative" style="margin: 0;">
+  <!-- Podgląd wgranego zdjęcia -->
+  <img id="preview" src="" alt="Brak Zdjęcia" class="object-contain w-full rounded-lg photo" style="display: none; margin: 0;">
+  
+  <!-- Miejsce zastępcze (widoczne dopóki nie wybierzesz pliku) -->
+  <div id="placeholder" class="flex items-center justify-center w-full rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 text-gray-400 text-xs text-center p-4" style="margin: 0; min-height: 150px;">
+    <span>Kliknij, aby dodać zdjęcie</span>
+  </div>
+
+  <!-- Ukryty input pliku -->
+  <input type="file" id="photo-input" accept="image/*" class="hidden" onchange="previewUploadedImage(event)">
+</label>
+
+<script>
+  function previewUploadedImage(event) {
+    const input = event.target;
+    const preview = document.getElementById('preview');
+    const placeholder = document.getElementById('placeholder');
+
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>
 
             <br>
       <img src="./dowodnowy_files/flaga.gif" alt="flaga" id="flaga" style="margin: 0;">
